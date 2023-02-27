@@ -18,6 +18,7 @@ import com.example.shoppinglist.entities.ShoppingListNames
 )
 abstract class MainDataBase:RoomDatabase() {
 
+    abstract fun getDao():Dao
     companion object{
         @Volatile
         private var INSTANCE:MainDataBase?=null
