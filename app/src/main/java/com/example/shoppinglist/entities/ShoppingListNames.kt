@@ -23,5 +23,5 @@ data class ShoppingListNames(
     val checkedItemsCounter:Int,
 
     @ColumnInfo(name = "itemsId")
-    val itemId:String
+    val itemsId:String
 ):java.io.Serializable
