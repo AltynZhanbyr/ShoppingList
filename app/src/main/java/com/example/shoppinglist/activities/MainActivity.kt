@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ActivityMainBinding
+import com.example.shoppinglist.fragments.FragmentManager
+import com.example.shoppinglist.fragments.NoteFragment
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                     mes = "Settings"
                 }
                 R.id.notes-> {
-                    mes = "Notes"
+                    FragmentManager.setFragment(NoteFragment.newInstance(), this)
                 }
                 R.id.shop_list->{
                     mes = "Shop List"
@@ -34,7 +36,6 @@ class MainActivity : AppCompatActivity() {
                     mes = "New"
                 }
             }
-            Snackbar.make(binding?.root?.rootView!!, "You clicked on $mes button",Snackbar.LENGTH_SHORT).show()
             true
         }
     }
