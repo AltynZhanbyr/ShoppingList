@@ -13,16 +13,27 @@ import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.NoteListItemBinding
 import com.example.shoppinglist.entities.NoteItem
 
-class NoteAdapter:ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
+class NoteAdapter(private val onDeleteClickListener:OnItemClickListener ):ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
+
+    interface OnItemClickListener {
+        fun onDelete(noteItem: NoteItem)
+        fun onClick(noteItem: NoteItem)
+    }
 
     class ItemHolder(view: View):RecyclerView.ViewHolder(view){
         private val binding = NoteListItemBinding.bind(view)
 
-        fun bind(noteItem: NoteItem){
+        fun bind(noteItem: NoteItem, onDeleteClickListener:OnItemClickListener ){
             with(binding) {
                 this.noteDescription.text = noteItem.content
                 this.noteTime.text = noteItem.time
                 this.noteTitle.text = noteItem.title
+                this.imageButtonDelete.setOnClickListener{
+                    onDeleteClickListener.onDelete(noteItem)
+                }
+                itemView.setOnClickListener{
+                    onDeleteClickListener.onClick(noteItem)
+                }
             }
         }
         companion object{
@@ -52,6 +63,6 @@ class NoteAdapter:ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onDeleteClickListener)
     }
 }

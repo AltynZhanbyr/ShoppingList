@@ -33,11 +33,12 @@ class MainActivity : AppCompatActivity() {
                     mes = "Shop List"
                 }
                 R.id.new_item->{
-                    mes = "New"
+                    FragmentManager.currentFragment?.onClickNew()
                 }
             }
             true
         }
+
     }
 
     override fun onDestroy() {
